@@ -1,4 +1,4 @@
-from app.schemas.cafe import CafeBase, CafeCreate, CafeResponse, CafeUpdate
+from app.schemas.cafe import CafeCreate, CafeResponse, CafeUpdate
 from app.schemas.cafe_employee import (
     CafeEmployeeBase,
     CafeEmployeeCreate,
@@ -9,7 +9,6 @@ from app.schemas.employee import EmployeeBase, EmployeeCreate, EmployeeResponse,
 
 
 __all__ = [
-    "CafeBase",
     "CafeCreate",
     "CafeResponse",
     "CafeUpdate",
