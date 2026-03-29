@@ -1,4 +1,3 @@
-from uuid import UUID
 from dataclasses import dataclass
 
 from sqlalchemy import func, select
@@ -27,7 +26,8 @@ class ListCafesHandler:
             stmt = stmt.where(Cafe.location == query.location)
 
         stmt = stmt.group_by(Cafe.id).order_by(
-            func.count(CafeEmployee.id).desc()
+            func.count(CafeEmployee.id).desc(),
+            Cafe.name.asc()
         )
 
         return list(self.db.scalars(stmt).all())

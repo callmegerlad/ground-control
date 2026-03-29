@@ -14,7 +14,7 @@ from app.core.exceptions import NotFoundException, BadRequestException
 from app.core.dependencies import get_mediator
 
 
-router = APIRouter(prefix="/cafes", tags=["cafes"])
+router = APIRouter()
 
 
 @router.get(
@@ -26,6 +26,11 @@ def list_cafes(
     location: str | None = None,
     mediator: Mediator = Depends(get_mediator),
 ) -> list[CafeResponse]:
+    """
+    Return a list of cafes, optionally filtered by location. 
+    
+    Cafes are ordered by number of employees (descending), and then by name (ascending).
+    """
     query = ListCafesQuery(location=location)
     return mediator.send(query)
 
@@ -39,6 +44,7 @@ def create_cafe(
     payload: CafeCreate,
     mediator: Mediator = Depends(get_mediator),
 ) -> CafeResponse:
+    """Create a new cafe."""
     command = CreateCafeCommand(
         name=payload.name,
         description=payload.description,
@@ -58,6 +64,7 @@ def update_cafe(
     payload: CafeUpdate,
     mediator: Mediator = Depends(get_mediator),
 ) -> CafeResponse:
+    """Update an existing cafe's details by ID."""
     update_data = payload.model_dump(exclude_unset=True)
 
     if not update_data:
@@ -83,6 +90,7 @@ def delete_cafe(
     cafe_id: UUID,
     mediator: Mediator = Depends(get_mediator),
 ) -> None:
+    """Delete a cafe by ID."""
     command = DeleteCafeCommand(cafe_id=cafe_id)
     deleted = mediator.send(command)
 
