@@ -12,8 +12,22 @@ from app.application.commands.cafes import (
     UpdateCafeHandler,
 )
 from app.application.queries.cafes import (
-    ListCafesHandler,
     ListCafesQuery,
+    ListCafesHandler,
+)
+from app.application.commands.employees import (
+    CreateEmployeeCommand,
+    CreateEmployeeHandler,
+    DeleteEmployeeCommand,
+    DeleteEmployeeHandler,
+    UpdateEmployeeCommand,
+    UpdateEmployeeHandler,
+)
+from app.application.queries.employees import (
+    ListEmployeesQuery,
+    ListEmployeesHandler,
+    GetEmployeeByIdQuery,
+    GetEmployeeByIdHandler
 )
 
 
@@ -26,5 +40,10 @@ def get_mediator(db: Session = Depends(get_db)) -> Mediator:
             UpdateCafeCommand: UpdateCafeHandler(db),
             DeleteCafeCommand: DeleteCafeHandler(db),
             ListCafesQuery: ListCafesHandler(db),
+            CreateEmployeeCommand: CreateEmployeeHandler(db),
+            UpdateEmployeeCommand: UpdateEmployeeHandler(db),
+            DeleteEmployeeCommand: DeleteEmployeeHandler(db),
+            ListEmployeesQuery: ListEmployeesHandler(db),
+            GetEmployeeByIdQuery: GetEmployeeByIdHandler(db),
         }
     )
