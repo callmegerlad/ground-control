@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from app.api.v1.router import api_v1_router
 from app.core.config import get_settings
 
 
@@ -10,7 +11,12 @@ description = """
 
 *Created by Gerald Koh.*
 """
-tags_metadata = []
+tags_metadata = [
+    {
+        "name": "cafes",
+        "description": "Endpoints for managing cafes and their details."
+    }
+]
 
 # Retrieve settings
 settings = get_settings()
@@ -31,3 +37,5 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+app.include_router(api_v1_router)
