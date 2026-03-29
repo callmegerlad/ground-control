@@ -15,6 +15,10 @@ tags_metadata = [
     {
         "name": "cafes",
         "description": "Endpoints for managing cafes and their details."
+    },
+    {
+        "name": "employees",
+        "description": "Endpoints for managing employees, their details and their cafe assignments."
     }
 ]
 
