@@ -12,7 +12,7 @@ class Settings(BaseSettings):
     DB_NAME: str = "groundcontrol"
     DB_USER: str = "user"
     DB_PASSWORD: str = "password"
-    FRONTEND_ORIGIN: str = "http://localhost:3000"
+    FRONTEND_ORIGIN: str = "http://localhost:5173"
 
     @property
     def DATABASE_URL(self) -> str:
