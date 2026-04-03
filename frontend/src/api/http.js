@@ -10,7 +10,14 @@ function buildApiBaseUrl() {
 
   const host =
     typeof window !== "undefined" ? window.location.hostname : "localhost";
-  return `http://${host}:8000/api/v1`;
+
+  if (host === "localhost" || host === "127.0.0.1") {
+    return `http://${host}:8000/api/v1`;
+  }
+
+  throw new Error(
+    "VITE_API_BASE_URL is required in non-local environments and must use HTTPS.",
+  );
 }
 
 const apiBaseUrl = buildApiBaseUrl();
