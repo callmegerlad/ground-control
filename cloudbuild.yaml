@@ -17,6 +17,8 @@ steps:
     id: 'build-frontend'
     args:
       - 'build'
+      - '--build-arg'
+      - 'VITE_API_BASE_URL=${_FRONTEND_API_BASE_URL}'
       - '-t'
       - '${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_REPOSITORY}/frontend:${SHORT_SHA}'
       - '-t'
@@ -87,6 +89,7 @@ steps:
 substitutions:
   _REGION: 'asia-southeast1'
   _REPOSITORY: 'ground-control'
+  _FRONTEND_API_BASE_URL: 'https://ground-control-backend-877920192090.asia-southeast1.run.app/api/v1'
 
 
 images:
