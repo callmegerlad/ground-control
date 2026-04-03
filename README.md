@@ -9,8 +9,7 @@
     <a href="#introduction">Introduction</a> &nbsp;&bull;&nbsp;
     <a href="#system-overview">System Overview</a> &nbsp;&bull;&nbsp;
     <a href="#getting-started">Getting Started</a> &nbsp;&bull;&nbsp;
-    <a href="#development-workflow">Development Workflow</a> &nbsp;&bull;&nbsp;
-    <a href="#production-deployment">Production Deployment</a>
+    <a href="#development-workflow">Development Workflow</a>
   </p>
 </div>
 
@@ -167,38 +166,6 @@ docker compose exec frontend npm run lint
 ### API Documentation
 
 Interactive API docs are available via **Swagger UI**: http://localhost:8000/docs
-
-
-## Production Deployment
-
-The project is designed for deployment in **containerised environments** such as Google Cloud Run.
-
-
-### Backend Deployment
-
-* Build image from `backend/Dockerfile`
-* Provide production database credentials via environment variables
-* Ensure `FRONTEND_ORIGIN` matches deployed frontend URL for CORS
-
-### Frontend Deployment
-
-* Build image from `frontend/Dockerfile`
-* Configure:
-
-  * `VITE_API_BASE_URL` → Backend API URL
-  * `VITE_ALLOWED_HOSTS` → Comma-separated hostnames
-
-Example:
-
-```bash
-VITE_ALLOWED_HOSTS=ground-control-frontend-xxx.run.app,ground-control.geraldkjk.com
-```
-
-### Notes
-
-* `allowedHosts` should contain **hostnames only** (no `https://`)
-* Database can be initialised using backend seed scripts
-* API is always explorable via `/docs`
 
 
 ## License
