@@ -23,6 +23,10 @@ class CafeEmployee(Base):
             "cafe_id",
             "employee_id",
             name="uq_cafe_employees_cafe_employee"
+        ),
+        UniqueConstraint(
+            "employee_id",
+            name="uq_cafe_employees_employee_single_cafe"
         )
     )
 

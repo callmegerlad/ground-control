@@ -2,9 +2,12 @@ from uuid import UUID
 from typing import Any
 from dataclasses import dataclass
 
+from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from app.models.cafe import Cafe
+from app.models.cafe_employee import CafeEmployee
+from app.models.employee import Employee
 
 
 @dataclass(frozen=True)
@@ -69,6 +72,17 @@ class DeleteCafeHandler:
         if cafe is None:
             return False
 
+        # Delete all employees associated with this cafe
+        cafe_employees = self.db.scalars(
+            select(CafeEmployee).where(CafeEmployee.cafe_id == command.cafe_id)
+        ).all()
+
+        for cafe_employee in cafe_employees:
+            employee = self.db.get(Employee, cafe_employee.employee_id)
+            if employee is not None:
+                self.db.delete(employee)
+
+        # Delete the cafe
         self.db.delete(cafe)
         self.db.commit()
         return True

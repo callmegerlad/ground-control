@@ -21,21 +21,21 @@ def create_cafes() -> list[dict]:
             "name": "Joji's Diner",
             "description": "A cozy neighborhood diner with vintage vibes, serving artisanal coffee and homemade comfort food. Known for their signature espresso blends and Sunday brunches.",
             "location": "Tiong Bahru, Singapore",
-            "logo_path": ""
+            "logo_path": "https://jojis.sg/wp-content/uploads/2025/03/socials-dp-1.webp"
         },
         {
             "id": uuid.uuid4(),
             "name": "Tiong Bahru Bakery",
             "description": "Award-winning French-inspired bakery featuring fresh pastries and artisan bread. A staple in the Tiong Bahru area with a minimalist aesthetic and excellent specialty coffee.",
             "location": "Tiong Bahru, Singapore",
-            "logo_path": ""
+            "logo_path": "https://images.deliveryhero.io/image/fd-sg/sg-logos/ct6bq-logo.jpg"
         },
         {
             "id": uuid.uuid4(),
             "name": "Hvala",
             "description": "Hvala is a popular Japanese-inspired teahouse in Singapore celebrated for its minimalist, zen-like aesthetic and premium ceremonial-grade matcha.",
             "location": "North Bridge Rd, Singapore",
-            "logo_path": ""
+            "logo_path": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyhOdzj_7-a9K0fYU0Jt-xDht7z_w5kfIwfg&s"
         },
         {
             "id": uuid.uuid4(),
@@ -169,7 +169,7 @@ def create_cafe_employee_assignments(
     cafes: list[Cafe],
     employees: list[Employee]
 ) -> list[dict]:
-    """Create cafe-employee assignments with realistic start dates."""
+    """Create cafe-employee assignments with each employee assigned to only one cafe."""
     assignments = []
     base_date = date.today()
 
@@ -177,51 +177,44 @@ def create_cafe_employee_assignments(
     assignments.extend([
         {"cafe": cafes[0], "employee": employees[0], "start_date": base_date},
         {"cafe": cafes[0], "employee": employees[1], "start_date": base_date - timedelta(days=30)},
-        {"cafe": cafes[0], "employee": employees[4], "start_date": base_date - timedelta(days=60)},
     ])
 
     # Tiong Bahru Bakery
     assignments.extend([
         {"cafe": cafes[1], "employee": employees[2], "start_date": base_date},
         {"cafe": cafes[1], "employee": employees[3], "start_date": base_date - timedelta(days=30)},
-        {"cafe": cafes[1], "employee": employees[6], "start_date": base_date - timedelta(days=45)},
     ])
 
     # Hvala
     assignments.extend([
-        {"cafe": cafes[2], "employee": employees[5], "start_date": base_date},
-        {"cafe": cafes[2], "employee": employees[7], "start_date": base_date - timedelta(days=15)},
-        {"cafe": cafes[2], "employee": employees[9], "start_date": base_date - timedelta(days=60)},
-        {"cafe": cafes[2], "employee": employees[4], "start_date": base_date - timedelta(days=35)},
+        {"cafe": cafes[2], "employee": employees[4], "start_date": base_date},
+        {"cafe": cafes[2], "employee": employees[5], "start_date": base_date - timedelta(days=15)},
+        {"cafe": cafes[2], "employee": employees[11], "start_date": base_date - timedelta(days=366)},
     ])
 
     # Symmetry Café
     assignments.extend([
-        {"cafe": cafes[3], "employee": employees[8], "start_date": base_date - timedelta(days=10)},
-        {"cafe": cafes[3], "employee": employees[10], "start_date": base_date - timedelta(days=20)},
+        {"cafe": cafes[3], "employee": employees[6], "start_date": base_date - timedelta(days=10)},
+        {"cafe": cafes[3], "employee": employees[7], "start_date": base_date - timedelta(days=20)},
     ])
 
     # The Pinnacle@Duxton Café
     assignments.extend([
-        {"cafe": cafes[4], "employee": employees[1], "start_date": base_date - timedelta(days=90)},
-        {"cafe": cafes[4], "employee": employees[9], "start_date": base_date - timedelta(days=100)},
+        {"cafe": cafes[4], "employee": employees[8], "start_date": base_date - timedelta(days=90)},
     ])
 
     # Chye Seng Huat Hardware
     assignments.extend([
-        {"cafe": cafes[5], "employee": employees[3], "start_date": base_date - timedelta(days=50)},
-        {"cafe": cafes[5], "employee": employees[5], "start_date": base_date - timedelta(days=70)},
+        {"cafe": cafes[5], "employee": employees[9], "start_date": base_date - timedelta(days=50)},
     ])
 
     # Café de la Paix
     assignments.extend([
-        {"cafe": cafes[6], "employee": employees[2], "start_date": base_date - timedelta(days=40)},
-        {"cafe": cafes[6], "employee": employees[11], "start_date": base_date - timedelta(days=55)},
+        {"cafe": cafes[6], "employee": employees[10], "start_date": base_date - timedelta(days=40)},
     ])
 
     # Workshop Coffee
     assignments.extend([
-        {"cafe": cafes[7], "employee": employees[7], "start_date": base_date - timedelta(days=80)},
     ])
 
     return assignments
