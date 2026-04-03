@@ -10,7 +10,7 @@ steps:
       - '${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_REPOSITORY}/backend:latest'
       - '-f'
       - 'backend/Dockerfile'
-      - '.'
+      - 'backend/'
 
   # Build the frontend image
   - name: 'gcr.io/cloud-builders/docker'
@@ -23,7 +23,7 @@ steps:
       - '${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_REPOSITORY}/frontend:latest'
       - '-f'
       - 'frontend/Dockerfile'
-      - '.'
+      - 'frontend/'
 
   # Push backend image to Artifact Registry
   - name: 'gcr.io/cloud-builders/docker'
