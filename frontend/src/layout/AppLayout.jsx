@@ -112,6 +112,7 @@ function ThemeToggleLabel({ darkMode, onThemeToggle }) {
 
 export default function AppLayout() {
   const navigate = useNavigate()
+  const location = useLocation()
   const activePath = useActivePath()
   const breadcrumbItems = useBreadcrumbItems()
   const [isMobile, setIsMobile] = useState(false)
@@ -149,6 +150,22 @@ export default function AppLayout() {
     document.documentElement.setAttribute('data-theme', darkMode ? 'dark' : 'light')
     window.localStorage.setItem(THEME_STORAGE_KEY, darkMode ? 'dark' : 'light')
   }, [darkMode])
+
+  useEffect(() => {
+    const titleMap = [
+      { match: /^\/cafes$/, title: 'Cafe Network' },
+      { match: /^\/cafes\/new$/, title: 'Create Cafe' },
+      { match: /^\/cafes\/edit\//, title: 'Edit Cafe' },
+      { match: /^\/employees$/, title: 'Employee Directory' },
+      { match: /^\/employees\/new$/, title: 'Create Employee' },
+      { match: /^\/employees\/edit\//, title: 'Edit Employee' },
+    ]
+
+    const activeTitle = titleMap.find((item) => item.match.test(location.pathname))?.title
+      ?? 'Cafe Management'
+
+    document.title = `Ground Control | ${activeTitle}`
+  }, [location.pathname])
 
   const onThemeToggle = (checked) => {
     setDarkMode(checked)
