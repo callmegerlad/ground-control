@@ -8,8 +8,7 @@
   <p align="center">
     <a href="#introduction">Introduction</a> &nbsp;&bull;&nbsp;
     <a href="#system-overview">System Overview</a> &nbsp;&bull;&nbsp;
-    <a href="#getting-started">Getting Started</a> &nbsp;&bull;&nbsp;
-    <a href="#development-workflow">Development Workflow</a>
+    <a href="#getting-started">Getting Started</a>
   </p>
 </div>
 
@@ -25,7 +24,7 @@ Built with a modern, containerised stack, the project supports both **local deve
 
 ### System Architecture
 
-![System Architecture Diagram for Ground Control](./Ground_Control-System_Achitecture.png "System Architecture Diagram")
+![System Architecture Diagram for Ground Control](./docs/static/Ground_Control-System_Achitecture.png "System Architecture Diagram")
 
 
 The application follows a **client-server architecture**:
@@ -73,7 +72,7 @@ The application is deployed on **Google Cloud Run** behind a custom domain mappi
 ```
 .
 ├── backend/           # FastAPI application, models, migrations, seed scripts
-├── frontend/          # React single-page application
+├── frontend/          # React application
 ├── cloudbuild.yaml    # CI/CD pipeline for automated builds & deployments
 ├── docker-compose.yml # Local orchestration
 ```
@@ -166,6 +165,12 @@ To run backend tests:
 
 ```shell
 docker-compose exec backend pytest -v
+```
+
+To clear the database:
+
+```shell
+docker-compose exec backend python manage_db.py clear
 ```
 
 
