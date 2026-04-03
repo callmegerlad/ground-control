@@ -6,6 +6,7 @@ import EntityFormTemplate from '../components/FormTemplate'
 import EmployeeFormFields from '../features/employees/EmployeeFormFields'
 import { useCafes } from '../hooks/use-cafes'
 import { useCreateEmployee } from '../hooks/use-employees'
+import { useUnsavedChangesWarning } from '../hooks/use-unsaved-changes-warning'
 
 function toEmployeePayload(values) {
   return {
@@ -36,7 +37,7 @@ export default function EmployeeCreatePage() {
   const {
     control,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isDirty },
   } = useForm({
     mode: 'onBlur',
     defaultValues: {
@@ -49,6 +50,8 @@ export default function EmployeeCreatePage() {
       start_date: dayjs(),
     },
   })
+
+  useUnsavedChangesWarning(isDirty)
 
   const onSubmit = handleSubmit(async (values) => {
     await createEmployeeMutation.mutateAsync(toEmployeePayload(values))
@@ -67,6 +70,7 @@ export default function EmployeeCreatePage() {
       onSubmit={onSubmit}
       isSubmitting={createEmployeeMutation.isPending}
       errorMessage={errorMessage}
+      isDirty={isDirty}
     >
       <EmployeeFormFields
         control={control}

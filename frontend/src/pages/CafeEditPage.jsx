@@ -5,6 +5,7 @@ import { Alert, Spin } from 'antd'
 import EntityFormTemplate from '../components/FormTemplate'
 import CafeFormFields from '../features/cafes/CafeFormFields'
 import { useCafes, useUpdateCafe } from '../hooks/use-cafes'
+import { useUnsavedChangesWarning } from '../hooks/use-unsaved-changes-warning'
 
 function toCafePayload(values) {
   return {
@@ -25,7 +26,7 @@ export default function CafeEditPage() {
     control,
     reset,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isDirty },
   } = useForm({
     mode: 'onBlur',
     defaultValues: {
@@ -35,6 +36,8 @@ export default function CafeEditPage() {
       logo_path: '',
     },
   })
+
+  useUnsavedChangesWarning(isDirty)
 
   const cafe = (cafesQuery.data ?? []).find((item) => String(item.id) === String(cafeId))
 
@@ -82,6 +85,7 @@ export default function CafeEditPage() {
       onSubmit={onSubmit}
       isSubmitting={updateCafeMutation.isPending}
       errorMessage={errorMessage}
+      isDirty={isDirty}
     >
       <CafeFormFields control={control} errors={errors} />
     </EntityFormTemplate>

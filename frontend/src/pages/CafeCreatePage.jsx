@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form'
 import EntityFormTemplate from '../components/FormTemplate'
 import CafeFormFields from '../features/cafes/CafeFormFields'
 import { useCreateCafe } from '../hooks/use-cafes'
+import { useUnsavedChangesWarning } from '../hooks/use-unsaved-changes-warning'
 
 function toCafePayload(values) {
   return {
@@ -20,7 +21,7 @@ export default function CafeCreatePage() {
   const {
     control,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isDirty },
   } = useForm({
     mode: 'onBlur',
     defaultValues: {
@@ -30,6 +31,8 @@ export default function CafeCreatePage() {
       logo_path: '',
     },
   })
+
+  useUnsavedChangesWarning(isDirty)
 
   const onSubmit = handleSubmit(async (values) => {
     await createCafeMutation.mutateAsync(toCafePayload(values))
@@ -47,6 +50,7 @@ export default function CafeCreatePage() {
       onSubmit={onSubmit}
       isSubmitting={createCafeMutation.isPending}
       errorMessage={errorMessage}
+      isDirty={isDirty}
     >
       <CafeFormFields control={control} errors={errors} />
     </EntityFormTemplate>

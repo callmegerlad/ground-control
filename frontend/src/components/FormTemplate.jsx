@@ -1,5 +1,5 @@
 import { Button, Space, Typography } from 'antd'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import PageHeader from './PageHeader'
 import ActionButton from './ActionButton'
 import { SaveOutlined } from '@ant-design/icons'
@@ -17,7 +17,17 @@ export default function EntityFormTemplate({
   isSubmitting,
   children,
   errorMessage,
+  isDirty = false,
 }) {
+  const navigate = useNavigate()
+
+  const handleCancel = () => {
+    if (isDirty && !window.confirm('You have unsaved changes. Are you sure you want to leave?')) {
+      return
+    }
+    navigate(cancelTo)
+  }
+
   return (
     <section className="space-y-8">
       <PageHeader
@@ -25,14 +35,13 @@ export default function EntityFormTemplate({
         description={description}
         actions={
           <Space>
-            <Link to={cancelTo}>
-              <ActionButton 
-                label="Cancel"
-                icon={null}
-                type="default"
-                className="shadow-none! font-semibold! h-auto px-4!"
-              />
-            </Link>
+            <ActionButton
+              label="Cancel"
+              icon={null}
+              type="default"
+              className="shadow-none! font-semibold! h-auto px-4!"
+              onClick={handleCancel}
+            />
             <ActionButton
               label={submitLabel}
               icon={submitIcon}

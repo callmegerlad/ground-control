@@ -123,7 +123,9 @@ export default function EmployeeFormFields({ control, errors, cafeOptions, isEdi
           render={({ field }) => (
             <Select
               {...field}
+              allowClear
               options={genderOptions}
+              placeholder="Select gender"
               className="bg-surface-container-lowest! text-on-surface!"
               status={errors.gender ? 'error' : ''}
             />
