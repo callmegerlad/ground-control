@@ -5,11 +5,19 @@
 </div>
 
 <div align="center">
+
+  [![Database Documentation Badge](https://img.shields.io/badge/Database%20ER%20Diagram-F8CECC?style=for-the-badge&logo=diagramsdotnet&logoColor=FFFFFF&logoSize=auto&labelColor=222222)](./docs/DATABASE.md "Database Schema, ER Diagram & Seeding Guide")
+  &nbsp;
+  [![API Swagger UI Badge](https://img.shields.io/badge/API_Documentation-D5E8D4?style=for-the-badge&logo=fastapi&labelColor=222222&logoColor=FFFFFF)](https://api.ground-control.geraldkjk.com/docs "Interactive API Documentation")
+  &nbsp;
+
   <p align="center">
     <a href="#introduction">Introduction</a> &nbsp;&bull;&nbsp;
     <a href="#system-overview">System Overview</a> &nbsp;&bull;&nbsp;
     <a href="#getting-started">Getting Started</a>
   </p>
+
+  👆 Quick links above! 👆
 </div>
 
 
