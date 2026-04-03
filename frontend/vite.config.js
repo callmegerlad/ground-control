@@ -1,14 +1,23 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-import tailwindcss from '@tailwindcss/vite'
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import tailwindcss from "@tailwindcss/vite";
+
+const envAllowedHosts = (
+  process.env.VITE_ALLOWED_HOSTS ??
+  process.env.ALLOWED_HOSTS ??
+  ""
+)
+  .split(",")
+  .map((host) => host.trim())
+  .filter(Boolean);
+
+const allowedHosts = envAllowedHosts;
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [
-    react(),
-    tailwindcss()
-  ],
+  plugins: [react(), tailwindcss()],
   server: {
+    allowedHosts,
     watch: {
       usePolling: true,
     },
@@ -18,4 +27,4 @@ export default defineConfig({
       clientPort: 5173,
     },
   },
-})
+});
