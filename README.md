@@ -25,6 +25,9 @@ Built with a modern, containerised stack, the project supports both **local deve
 
 ### System Architecture
 
+![System Architecture Diagram for Ground Control](./Ground_Control-System_Achitecture.png "System Architecture Diagram")
+
+
 The application follows a typical **client-server architecture**:
 
 * **Frontend (React + Vite)** communicates with the backend via REST APIs
