@@ -8,7 +8,8 @@ import PageHeader from '../components/PageHeader'
 import DataGridPanel from '../components/DataGridPanel'
 import FilterSearchActions from '../components/FilterSearchActions'
 import EmployeesGrid from '../features/employees/EmployeesGrid'
-import dayjs from '../lib/dayjs'
+import { LIST_REFETCH_INTERVAL_MS } from '../lib/query-client'
+import { useSyncLabel } from '../hooks/use-sync-label'
 
 export default function EmployeesPage() {
   const navigate = useNavigate()
@@ -18,8 +19,12 @@ export default function EmployeesPage() {
   const cafeIdFromUrl = searchParams.get('cafeId')
   const selectedCafeId = cafeIdFromUrl || undefined
 
-  const employeesQuery = useEmployees(selectedCafeId)
-  const cafesQuery = useCafes(undefined)
+  const employeesQuery = useEmployees(selectedCafeId, {
+    refetchInterval: LIST_REFETCH_INTERVAL_MS,
+  })
+  const cafesQuery = useCafes(undefined, {
+    refetchInterval: LIST_REFETCH_INTERVAL_MS,
+  })
   const deleteEmployeeMutation = useDeleteEmployee()
 
   const cafeOptions = useMemo(() => {
@@ -32,7 +37,7 @@ export default function EmployeesPage() {
   }, [cafesQuery.data])
 
   const lastSyncedAt = Math.max(employeesQuery.dataUpdatedAt ?? 0, cafesQuery.dataUpdatedAt ?? 0)
-  const syncLabel = lastSyncedAt > 0 ? dayjs(lastSyncedAt).fromNow() : 'Not synced yet'
+  const syncLabel = useSyncLabel(lastSyncedAt)
   const totalEmployeeCount = employeesQuery.data?.length ?? 0
   const hasSearchFilter = searchText.trim().length > 0
   const hasCafeFilter = Boolean(selectedCafeId)
@@ -132,6 +137,7 @@ export default function EmployeesPage() {
             ) : (
               <Tag color="green">Synced {syncLabel}</Tag>
             )}
+            {hasCafeFilter ? <Tag color="blue">Cafe filter active</Tag> : null}
             {hasSearchFilter ? <Tag color="gold">Search active</Tag> : null}
           </Space>
         )}

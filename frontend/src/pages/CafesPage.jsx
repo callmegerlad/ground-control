@@ -8,7 +8,8 @@ import PageHeader from '../components/PageHeader'
 import DataGridPanel from '../components/DataGridPanel'
 import FilterSearchActions from '../components/FilterSearchActions'
 import CafesGrid from '../features/cafes/CafesGrid'
-import dayjs from '../lib/dayjs'
+import { LIST_REFETCH_INTERVAL_MS } from '../lib/query-client'
+import { useSyncLabel } from '../hooks/use-sync-label'
 
 function buildLocationOptions(cafes) {
   const allLocations = new Set((cafes ?? []).map((item) => item.location))
@@ -22,8 +23,12 @@ export default function CafesPage() {
 
   const selectedLocation = locationFilter === 'All Locations' ? undefined : locationFilter
 
-  const cafesQuery = useCafes(selectedLocation)
-  const employeesQuery = useEmployees(undefined)
+  const cafesQuery = useCafes(selectedLocation, {
+    refetchInterval: LIST_REFETCH_INTERVAL_MS,
+  })
+  const employeesQuery = useEmployees(undefined, {
+    refetchInterval: LIST_REFETCH_INTERVAL_MS,
+  })
   const deleteCafeMutation = useDeleteCafe()
 
   const locationOptions = useMemo(
@@ -32,7 +37,7 @@ export default function CafesPage() {
   )
 
   const lastSyncedAt = Math.max(cafesQuery.dataUpdatedAt ?? 0, employeesQuery.dataUpdatedAt ?? 0)
-  const syncLabel = lastSyncedAt > 0 ? dayjs(lastSyncedAt).fromNow() : 'Not synced yet'
+  const syncLabel = useSyncLabel(lastSyncedAt)
   const totalCafeCount = cafesQuery.data?.length ?? 0
   const hasSearchFilter = searchText.trim().length > 0
   const hasLocationFilter = Boolean(selectedLocation)
@@ -129,7 +134,7 @@ export default function CafesPage() {
             ) : (
               <Tag color="green">Synced {syncLabel}</Tag>
             )}
-            {hasLocationFilter ? <Tag color="gold">Location filtered</Tag> : null}
+            {hasLocationFilter ? <Tag color="blue">Location filtered</Tag> : null}
             {hasSearchFilter ? <Tag color="gold">Search active</Tag> : null}
           </Space>
         )}
