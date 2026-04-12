@@ -13,6 +13,9 @@ class Settings(BaseSettings):
     DB_USER: str = "user"
     DB_PASSWORD: str = "password"
     FRONTEND_ORIGIN: str = "http://localhost:5173"
+    MEDIA_UPLOAD_DIR: str = "static/uploads"
+    MEDIA_PUBLIC_URL_PATH: str = "/static/uploads"
+    MEDIA_MAX_FILE_SIZE_IN_BYTES: int = 2 * 1024 * 1024
 
     @property
     def DATABASE_URL(self) -> str:
