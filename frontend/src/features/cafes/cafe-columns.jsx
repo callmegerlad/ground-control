@@ -19,11 +19,6 @@ export function createCafeColumnDefs({ navigate, onDelete }) {
       width: 100,
       sortable: false,
       filter: false,
-      cellStyle: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'left',
-      },
       cellRenderer: (params) => {
         const hasLogo = Boolean(params.value)
         if (hasLogo) {
@@ -47,8 +42,9 @@ export function createCafeColumnDefs({ navigate, onDelete }) {
       headerName: 'Cafe Name',
       field: 'name',
       minWidth: 190,
+      wrapText: true,
       cellRenderer: (params) => (
-        <div className="flex flex-col">
+        <div className="flex flex-col gap-4">
           <span className="font-semibold text-on-surface">{params.value}</span>
           <span className="text-xs text-on-surface-variant">Created {formatDate(params.data.created_at)}</span>
         </div>
@@ -62,16 +58,14 @@ export function createCafeColumnDefs({ navigate, onDelete }) {
       autoHeight: true,
       cellClass: 'text-on-surface-variant',
       wrapText: true,
+      cellStyle: {
+        alignItems: 'flex-start',
+      },
     },
     {
       headerName: 'Employees',
       field: 'employees',
       width: 140,
-      cellStyle: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'left',
-      },
       cellRenderer: (params) => (
         <Button
           type="link"
@@ -95,23 +89,18 @@ export function createCafeColumnDefs({ navigate, onDelete }) {
       width: 160,
       sortable: false,
       filter: false,
-      cellStyle: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'left',
-      },
       cellRenderer: (params) => (
         <Space>
           <Button
             size="medium"
-            className="border-none! shadow-none! bg-transparent! hover:opacity-75"
+            className="shadow-none! bg-transparent! hover:opacity-75"
             onClick={() => navigate(`/cafes/edit/${params.data.id}`)}
           >
             <Icon name="Edit" size="18" className="inline-block stroke-primary" />
           </Button>
           <Button
             size="medium"
-            className="border-none! shadow-none! bg-transparent! hover:opacity-75"
+            className="shadow-none! bg-transparent! hover:opacity-75"
             danger
             onClick={() => onDelete(params.data)}
           >

@@ -29,6 +29,11 @@ export default function EmployeesGrid({ rowData, navigate, onDelete, loading }) 
           sortable: true,
           filter: true,
           resizable: true,
+          cellStyle: {
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'flex-start',
+          },
         }}
         rowHeight={66}
         suppressCellFocus

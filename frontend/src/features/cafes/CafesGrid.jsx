@@ -30,6 +30,11 @@ export default function CafesGrid({ rowData, navigate, onDelete, loading }) {
           filter: true,
           resizable: true,
           floatingFilter: false,
+          cellStyle: {
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'flex-start',
+          },
         }}
         animateRows
         suppressScrollOnNewData

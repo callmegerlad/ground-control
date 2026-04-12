@@ -79,14 +79,14 @@ export function createEmployeeColumnDefs({ navigate, onDelete }) {
         <Space>
           <Button
             size="medium"
-            className="border-none! shadow-none! bg-transparent! hover:opacity-75"
+            className="shadow-none! bg-transparent! hover:opacity-75"
             onClick={() => navigate(`/employees/edit/${params.data.id}`)}
           >
             <Icon name="Edit" size="18" className="inline-block stroke-primary" />
           </Button>
           <Button
             size="medium"
-            className="border-none! shadow-none! bg-transparent! hover:opacity-75"
+            className="shadow-none! bg-transparent! hover:opacity-75"
             danger
             onClick={() => onDelete(params.data)}
           >
