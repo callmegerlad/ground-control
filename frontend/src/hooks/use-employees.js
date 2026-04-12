@@ -6,10 +6,11 @@ import {
   updateEmployee,
 } from '../api/employees'
 
-export function useEmployees(cafeId) {
+export function useEmployees(cafeId, queryOptions = {}) {
   return useQuery({
     queryKey: ['employees', cafeId ?? 'all'],
     queryFn: () => fetchEmployees(cafeId),
+    ...queryOptions,
   })
 }
 

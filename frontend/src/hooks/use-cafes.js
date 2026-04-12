@@ -1,10 +1,11 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { createCafe, deleteCafe, fetchCafes, updateCafe } from '../api/cafes'
 
-export function useCafes(location) {
+export function useCafes(location, queryOptions = {}) {
   return useQuery({
     queryKey: ['cafes', location ?? 'all'],
     queryFn: () => fetchCafes(location),
+    ...queryOptions,
   })
 }
 

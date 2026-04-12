@@ -1,4 +1,4 @@
-import { QueryClient } from '@tanstack/react-query'
+import { QueryClient } from "@tanstack/react-query";
 
 export const queryClient = new QueryClient({
   defaultOptions: {
@@ -12,4 +12,6 @@ export const queryClient = new QueryClient({
       retry: 0,
     },
   },
-})
+});
+
+export const LIST_REFETCH_INTERVAL_MS = 60_000;
