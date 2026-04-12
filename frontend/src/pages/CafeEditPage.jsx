@@ -26,6 +26,7 @@ export default function CafeEditPage() {
     control,
     reset,
     handleSubmit,
+    setValue,
     formState: { errors, isDirty },
   } = useForm({
     mode: 'onBlur',
@@ -87,7 +88,7 @@ export default function CafeEditPage() {
       errorMessage={errorMessage}
       isDirty={isDirty}
     >
-      <CafeFormFields control={control} errors={errors} />
+      <CafeFormFields control={control} errors={errors} setValue={setValue} />
     </EntityFormTemplate>
   )
 }
