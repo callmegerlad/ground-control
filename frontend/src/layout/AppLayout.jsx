@@ -281,7 +281,7 @@ export default function AppLayout() {
   )
 
   return (
-    <Layout className="min-h-screen h-screen bg-surface-container-low!">
+    <Layout className="h-screen overflow-hidden bg-surface-container-low!">
       {isMobile ? (
         <Drawer
           open={!collapsed}
@@ -319,7 +319,7 @@ export default function AppLayout() {
       )}
 
       <Layout>
-        <Content className="bg-surface-container-low p-4 sm:p-6 lg:p-12">
+        <Content className="overflow-y-auto bg-surface-container-low p-4 sm:p-6 lg:p-12">
           <div className="my-4 flex items-center justify-between lg:hidden">
             <Text className="text-sm! uppercase tracking-[0.08em] text-on-surface-variant!">Ground Control</Text>
             <Button
