@@ -19,11 +19,12 @@ export default function EmployeesGrid({ rowData, navigate, onDelete, loading }) 
   )
 
   return (
-    <div className="ground-control-grid h-[560px] w-full rounded-xl">
+    <div className="ground-control-grid h-140 w-full rounded-xl">
       <AgGridReact
         theme={groundControlGridTheme}
         rowData={rowData}
         columnDefs={columnDefs}
+        getRowId={(params) => String(params.data.id)}
         defaultColDef={{
           sortable: true,
           filter: true,
@@ -32,6 +33,7 @@ export default function EmployeesGrid({ rowData, navigate, onDelete, loading }) 
         rowHeight={66}
         suppressCellFocus
         animateRows
+        suppressScrollOnNewData
         loading={loading}
       />
     </div>

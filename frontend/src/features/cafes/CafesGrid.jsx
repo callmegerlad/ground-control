@@ -19,11 +19,12 @@ export default function CafesGrid({ rowData, navigate, onDelete, loading }) {
   )
 
   return (
-    <div className="ground-control-grid h-[560px] w-full">
+    <div className="ground-control-grid h-140 w-full">
       <AgGridReact
         theme={groundControlGridTheme}
         rowData={rowData}
         columnDefs={columnDefs}
+        getRowId={(params) => String(params.data.id)}
         defaultColDef={{
           sortable: true,
           filter: true,
@@ -31,6 +32,7 @@ export default function CafesGrid({ rowData, navigate, onDelete, loading }) {
           floatingFilter: false,
         }}
         animateRows
+        suppressScrollOnNewData
         rowHeight={76}
         suppressCellFocus
         loading={loading}
